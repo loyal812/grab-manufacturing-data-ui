@@ -22,7 +22,7 @@ const Sidebar: NextPage = () => {
               <img src="/window.svg" />
             </span>
 
-            <span className="font-bold text-[#1c2931] group-hover:text-gray-800">
+            <span className="font-semibold  group-hover:text-gray-800">
               Home
             </span>
             <span className="invisible group-hover:visible">
@@ -39,7 +39,7 @@ const Sidebar: NextPage = () => {
               <img src="/manifacture.svg" className="w-full h-full" />
             </span>
 
-            <span className="font-bold text-[#1c2931] group-hover:text-gray-800">
+            <span className="font-semibold  group-hover:text-gray-800">
               Manufacturers
             </span>
             <span className="invisible group-hover:visible">
@@ -56,7 +56,7 @@ const Sidebar: NextPage = () => {
               <img src="/distribute.svg" className="w-full h-full" />
             </span>
 
-            <span className="font-bold text-[#1c2931] group-hover:text-gray-800">
+            <span className="font-semibold  group-hover:text-gray-800">
               Distributors
             </span>
             <span className="invisible group-hover:visible">
@@ -72,10 +72,10 @@ const Sidebar: NextPage = () => {
             <span className="hidden group-hover:block w-9 h-12">
               <img src="/extensionblack.svg" className="w-full h-full" />
             </span>
-
-            <span className="font-bold text-[#1c2931] text-md pl-1 w-full group-hover:text-gray-800">
-              Find The Supplier
+            <span className="font-semibold  group-hover:text-gray-800">
+              Search All
             </span>
+
             <span className="invisible group-hover:visible">
               <img src="/arrow.svg" />
             </span>
