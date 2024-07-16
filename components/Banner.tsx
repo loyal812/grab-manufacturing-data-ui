@@ -3,12 +3,12 @@ import React from "react";
 import { ArrowRightCircleIcon } from "@heroicons/react/20/solid";
 const Banner = () => {
   const scrollDown = () => {
-    window.scrollTo({ top: 850, behavior: "smooth" });
+    window.scrollTo({ top: 950, behavior: "smooth" });
   };
   return (
     <div className="absolute inset-0 max-h-screen ">
       <video
-        src="https://cdn.dribbble.com/users/1542362/screenshots/16499285/media/452718516761091228a754666099e367.mp4"
+        src="/Animation.mp4"
         autoPlay
         muted
         loop
