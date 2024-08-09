@@ -47,9 +47,9 @@ const Navbar = () => {
         />
       </button>
 
-      <div className="hidden  relative lg:flex justify-evenly items-center  text-lg text-white space-x-14 max-w-7xl ">
+      <div className="hidden  relative lg:flex justify-evenly items-center  text-sm text-white space-x-14 max-w-7xl ">
         <ButtonLink title="Home" link="/" />
-        <ButtonLink title="Dashbord" link="/dashbord" />
+        <ButtonLink title="Dashboard" link="/dashboard" />
       </div>
     </div>
   );

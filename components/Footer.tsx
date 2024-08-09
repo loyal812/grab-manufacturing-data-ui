@@ -4,30 +4,26 @@ import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 
 function Footer() {
-  const navigation = {
-    solutions: [
-      { name: "Marketing", href: "#" },
-      { name: "Analytics", href: "#" },
-      { name: "Commerce", href: "#" },
-      { name: "Insights", href: "#" },
-    ],
-  };
   const { ref, inView, entry } = useInView({
     /* Optional options */
     threshold: 0,
   });
   return (
-    <footer className="bg-gray-800" aria-labelledby="footer-heading" ref={ref}>
+    <footer
+      className="bottom-0 bg-gray-800 "
+      aria-labelledby="footer-heading"
+      ref={ref}
+    >
       <h2 id="footer-heading" className="sr-only">
         Footer
       </h2>
-      <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:py-16 lg:px-8">
+      <div className="max-w-7xl mx-auto py-5 px-4 sm:px-6 lg:py-10 lg:px-8">
         <div className="xl:grid xl:grid-cols-3 xl:gap-8">
           <div className="grid grid-cols-2 gap-8 xl:col-span-2">
             <div className="md:grid md:grid-cols-2 md:gap-8">
               <motion.div
                 animate={{
-                  x: inView ? "0" : -200,
+                  y: inView ? "0" : 200,
                   opacity: inView ? "1" : "0",
                 }}
                 transition={{ duration: 0.4 }}

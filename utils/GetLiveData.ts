@@ -24,9 +24,32 @@ export async function getLiveManufacturerData({
       await Promise.all(
         partnumbers.map(async (keyword: string) => {
           const response = await axios.get(
-            `https://fastapi0013.herokuapp.com/molex/${keyword}`
+            `https://compliancegrabber.herokuapp.com/molex/${keyword}`
           );
-          if (response) {
+
+          if (response && response.data.status !== 404) {
+            rawData = [...rawData, ...[response.data]];
+          }
+        })
+      );
+
+      const csv_data = Papa.unparse(rawData);
+      const LiveData = generateTableData(rawData);
+
+      return { csv_data, LiveData };
+    } catch (error) {
+      throw new Error(`${error}`);
+    }
+  } else if (supplier.toLowerCase() == "onsemi") {
+    try {
+      let rawData: any = [];
+      await Promise.all(
+        partnumbers.map(async (keyword: string) => {
+          const response = await axios.get(
+            `https://compliancegrabber.herokuapp.com/onsemi/${keyword}`
+          );
+
+          if (response && response.data.status !== 404) {
             rawData = [...rawData, ...[response.data]];
           }
         })
@@ -34,6 +57,29 @@ export async function getLiveManufacturerData({
       const csv_data = Papa.unparse(rawData);
 
       const LiveData = generateTableData(rawData);
+      console.log(LiveData);
+      return { csv_data, LiveData };
+    } catch (error) {
+      throw new Error(`${error}`);
+    }
+  } else if (supplier.toLowerCase() == "omron") {
+    try {
+      let rawData: any = [];
+      await Promise.all(
+        partnumbers.map(async (keyword: string) => {
+          const response = await axios.get(
+            `https://compliancegrabber.herokuapp.com/omron/${keyword}`
+          );
+
+          if (response && response.data.status !== 404) {
+            rawData = [...rawData, ...[response.data]];
+          }
+        })
+      );
+      const csv_data = Papa.unparse(rawData);
+
+      const LiveData = generateTableData(rawData);
+      console.log(LiveData);
 
       return { csv_data, LiveData };
     } catch (error) {
@@ -45,9 +91,9 @@ export async function getLiveManufacturerData({
       await Promise.all(
         partnumbers.map(async (keyword: string) => {
           const response = await axios.get(
-            `https://fastapi0013.herokuapp.com/wago/${keyword}`
+            `https://compliancegrabber.herokuapp.com/wago/${keyword}`
           );
-          if (response) {
+          if (response && response.data.status !== 404) {
             rawData = [...rawData, ...[response.data]];
           }
         })
@@ -55,6 +101,7 @@ export async function getLiveManufacturerData({
       const csv_data = Papa.unparse(rawData);
 
       const LiveData = generateTableData(rawData);
+      console.log(LiveData);
 
       return { csv_data, LiveData };
     } catch (error) {
@@ -66,9 +113,9 @@ export async function getLiveManufacturerData({
       await Promise.all(
         partnumbers.map(async (keyword: string) => {
           const response = await axios.get(
-            `https://fastapi0013.herokuapp.com/te/${keyword}`
+            `https://compliancegrabber.herokuapp.com/te/${keyword}`
           );
-          if (response) {
+          if (response && response.data.status !== 404) {
             rawData = [...rawData, ...[response.data]];
           }
         })
@@ -83,6 +130,7 @@ export async function getLiveManufacturerData({
     }
   }
 }
+
 export async function getLiveDistributersData({
   supplier,
   partnumbers,
@@ -115,14 +163,31 @@ export async function getLiveDistributersData({
     const csv_data = Papa.unparse(rawData);
     const LiveData = generateDigiKeyTable(rawData);
     return { csv_data, LiveData };
+  } else if (supplier.toLowerCase() == "arrow") {
+    let rawData: any[] = [];
+    await Promise.all(
+      partnumbers.map(async (partnumber) => {
+        const response = await axios.get(
+          `https://compliancegrabber.herokuapp.com/arrow/${partnumber}`
+        );
+        if (response && response.data.status !== 404) {
+          rawData = [...rawData, ...[response.data]];
+        }
+      })
+    );
+    const csv_data = Papa.unparse(rawData);
+    const LiveData = generateTableData(rawData);
+    console.log(LiveData);
+    return { csv_data, LiveData };
   } else if (supplier == "Phoenix") {
     let rawData: any[] = [];
     await Promise.all(
       partnumbers.map(async (partnumber) => {
         const response = await axios.get(
-          `https://fastapi0013.herokuapp.com/phoenix/${partnumber}`
+          `https://compliancegrabber.herokuapp.com/phoenix/${partnumber}`
         );
-        if (response) {
+        console.log(response.data);
+        if (response && response.data.status !== 404) {
           rawData = [...rawData, ...[response.data]];
         }
       })
@@ -135,24 +200,26 @@ export async function getLiveDistributersData({
     await Promise.all(
       partnumbers.map(async (partnumber) => {
         const response = await axios.get(
-          `https://fastapi0013.herokuapp.com/maxim/${partnumber}`
+          `https://compliancegrabber.herokuapp.com/maxim/${partnumber}`
         );
-        if (response) {
+        if (response && response.data.status !== 404) {
           rawData = [...rawData, ...[response.data]];
         }
       })
     );
     const csv_data = Papa.unparse(rawData);
     const LiveData = generateTableData(rawData);
+    console.log(LiveData);
     return { csv_data, LiveData };
   } else if (supplier == "Rs-components") {
     let rawData: any[] = [];
     await Promise.all(
       partnumbers.map(async (partnumber) => {
         const response = await axios.get(
-          `https://fastapi0013.herokuapp.com/rscomponents/${partnumber}`
+          `https://compliancegrabber.herokuapp.com/rscomponents/${partnumber}`
         );
-        if (response) {
+
+        if (response && response.data.status !== 404) {
           rawData = [...rawData, ...[response.data]];
         }
       })
@@ -165,14 +232,36 @@ export async function getLiveDistributersData({
     await Promise.all(
       partnumbers.map(async (partnumber) => {
         const response = await fetchFutureElectronics(partnumber);
-
-        if (response && response[0]?.status !== "not found") {
+        console.log("herr", response);
+        if (response && response[0]) {
           rawData = [...rawData, ...response];
         }
       })
     );
     const csv_data = Papa.unparse(rawData);
     const LiveData = generateTableData(rawData);
+    console.log(LiveData);
     return { csv_data, LiveData };
+  }
+}
+
+interface LiveDataProps {
+  type: string;
+  supplier: string;
+  partnumbers: string[];
+}
+
+export default async function GetLiveData({
+  type,
+  supplier,
+  partnumbers,
+}: LiveDataProps) {
+  if (type.toLowerCase() === "manufacturer") {
+    const response = await getLiveManufacturerData({ supplier, partnumbers });
+
+    return response;
+  } else {
+    const response = await getLiveDistributersData({ supplier, partnumbers });
+    return response;
   }
 }
