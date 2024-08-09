@@ -2,15 +2,17 @@ import Link from "next/link";
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { ArrowRightIcon } from "@heroicons/react/20/solid";
+import { useRouter } from "next/router";
 function DashbordSideBar() {
   const [showSidebar, setshowSidebar] = useState(true);
+  const router = useRouter();
   return (
     <div
       className={`flex md:block bg-gray-200 ${
         showSidebar
-          ? "absolute md:relative inset-y-0 left-0 z-20 min-w-[250px] sidebar-color "
+          ? "absolute md:relative inset-y-0 left-0 z-20 min-w-[200px] sidebar-color "
           : ""
-      } justify-center items-center smooth-tranisiton md:sidebar-color min-h-screen px-2  lg:min-w-[300px] md:px-4 py-4`}
+      } justify-center items-center smooth-tranisiton md:sidebar-color min-h-screen px-2  lg:min-w-[200px] md:px-4 py-4`}
     >
       <div className={`${showSidebar ? "block" : "hidden md:block "}`}>
         <button
@@ -67,20 +69,26 @@ function DashbordSideBar() {
           }}
           transition={{ duration: 0.4 }}
         >
-          <div className="sidebar-element">
+          <div
+            className="sidebar-element"
+            onClick={() => router.push("/dashbord")}
+          >
             <p>Overview</p>
           </div>
-          <div className="sidebar-element">
-            <p>Type of supplier</p>
+          <div
+            className="sidebar-element"
+            onClick={() => router.push("/dashbord/findsupplier")}
+          >
+            <p>Find supplier</p>
           </div>
-          <div className="sidebar-element">
-            <p>Generate SPN data</p>
+          <div
+            className="sidebar-element"
+            onClick={() => router.push("/dashbord/spn")}
+          >
+            <p>Search spn </p>
           </div>
           <div className="sidebar-element">
             <p>Find the supplier</p>
-          </div>
-          <div className="sidebar-element">
-            <p>Live SPN data search</p>
           </div>
         </motion.div>
       </div>
