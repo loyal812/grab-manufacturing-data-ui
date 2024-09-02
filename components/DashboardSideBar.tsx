@@ -27,11 +27,10 @@ function DashboardSideBar() {
         </svg>
       </div> */}
       <div
-        className={`  ${
-          showSidebar ? "fixed block" : "relative hidden md:block "
-        } z-20 smooth-tranisiton sidebar-color min-h-screen min-w-[250px] px-2  py-4`}
+        className={`  ${showSidebar ? "fixed block" : "relative hidden md:block "
+          } z-20 smooth-tranisiton sidebar-color min-h-screen min-w-[250px] px-2  py-4`}
       >
-        <div className="fixed ">
+        <div>
           {/* LOGO + APP NAME */}
           <Link href="/">
             <a>
